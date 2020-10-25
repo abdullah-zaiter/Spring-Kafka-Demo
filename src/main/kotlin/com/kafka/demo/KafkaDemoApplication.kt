@@ -7,10 +7,10 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
 import kotlin.system.exitProcess
-import com.kafka.demo.controller.ConsoleColors.ANSI_BOLD
-import com.kafka.demo.controller.ConsoleColors.ANSI_GREEN
-import com.kafka.demo.controller.ConsoleColors.ANSI_RESET
-import com.kafka.demo.controller.ConsoleColors.ANSI_UNDERLINE
+import com.kafka.demo.util.ConsoleColors.ANSI_BOLD
+import com.kafka.demo.util.ConsoleColors.ANSI_GREEN
+import com.kafka.demo.util.ConsoleColors.ANSI_RESET
+import com.kafka.demo.util.ConsoleColors.ANSI_UNDERLINE
 import com.kafka.demo.controller.producer.ProducerWrapper
 
 @SpringBootApplication

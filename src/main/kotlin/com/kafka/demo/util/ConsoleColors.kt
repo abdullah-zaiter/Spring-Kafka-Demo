@@ -1,4 +1,4 @@
-package com.kafka.demo.controller
+package com.kafka.demo.util
 
 object ConsoleColors {
     const val ANSI_RESET = "\u001B[0m"

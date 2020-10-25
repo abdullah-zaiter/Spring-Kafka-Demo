@@ -2,7 +2,7 @@ package com.kafka.demo.controller.producer
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.kafka.demo.controller.ConsoleColors
+import com.kafka.demo.util.ConsoleColors
 import com.kafka.demo.controller.producer.model.ProducedUser
 
 class ProducerWrapper(
