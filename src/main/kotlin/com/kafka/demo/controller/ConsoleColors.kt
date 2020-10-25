@@ -10,4 +10,6 @@ object ConsoleColors {
     const val ANSI_PURPLE = "\u001B[35m"
     const val ANSI_CYAN = "\u001B[36m"
     const val ANSI_WHITE = "\u001B[37m"
+    const val ANSI_BOLD = "\u001B[1m"
+    const val ANSI_UNDERLINE = "\u001B[4m"
 }
