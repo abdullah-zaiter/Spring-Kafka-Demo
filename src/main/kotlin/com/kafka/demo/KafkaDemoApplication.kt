@@ -10,6 +10,7 @@ import kotlin.system.exitProcess
 import com.kafka.demo.controller.ConsoleColors.ANSI_BOLD
 import com.kafka.demo.controller.ConsoleColors.ANSI_GREEN
 import com.kafka.demo.controller.ConsoleColors.ANSI_RESET
+import com.kafka.demo.controller.ConsoleColors.ANSI_UNDERLINE
 import com.kafka.demo.controller.producer.ProducerWrapper
 
 @SpringBootApplication
@@ -31,7 +32,7 @@ private fun execute() {
 		try {
 			it.get(RUNNING_TIME_IN_SECONDS, TimeUnit.SECONDS)
 		} catch (e: TimeoutException) {
-			println(ANSI_GREEN + ANSI_BOLD + "Done running for ${RUNNING_TIME_IN_SECONDS}s" + ANSI_RESET)
+			println(ANSI_GREEN + ANSI_BOLD + ANSI_UNDERLINE + "Done running for ${RUNNING_TIME_IN_SECONDS}s" + ANSI_RESET)
 			it.cancel(true)
 		}
 	}

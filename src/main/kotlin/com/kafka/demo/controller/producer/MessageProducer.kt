@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.concurrent.Future
 
 @RestController
-class MessageProducer @Autowired constructor() {
+class MessageProducer {
 
     var kafkaTemplate: KafkaTemplate<String, String> = KafkaProducerConfig().kafkaTemplate()
     val topic: String = "test_topic"
