@@ -10,6 +10,7 @@ import kotlin.system.exitProcess
 import com.kafka.demo.controller.ConsoleColors.ANSI_BOLD
 import com.kafka.demo.controller.ConsoleColors.ANSI_GREEN
 import com.kafka.demo.controller.ConsoleColors.ANSI_RESET
+import com.kafka.demo.controller.producer.ProducerWrapper
 
 @SpringBootApplication
 class KafkaDemoApplication
