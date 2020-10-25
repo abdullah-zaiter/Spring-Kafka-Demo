@@ -1,5 +1,6 @@
-package com.kafka.demo.controller
+package com.kafka.demo.controller.producer
 
+import com.kafka.demo.controller.KafkaProducerConfig
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.clients.producer.RecordMetadata
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,14 +20,13 @@ class MessageProducer @Autowired constructor() {
     @GetMapping("/send")
     fun sendMessage(@RequestParam("message") message: String): ResponseEntity<String> {
         val sendResult = kafkaTemplate.send(topic, message).get()
-        return ResponseEntity.ok(sendResult.producerRecord.value() + " sent to topic")
+        return ResponseEntity.ok(sendResult.producerRecord.value() + " sent to topic ${sendResult.producerRecord.topic()}")
     }
 
     @GetMapping("/produce")
     fun produceMessage(@RequestParam("message") message: String): ResponseEntity<String> {
-        val producerRecord: ProducerRecord<String, String> = ProducerRecord(topic, message)
         val producer = KafkaProducerConfig().producerFactory().createProducer()
-        val future: Future<RecordMetadata> = producer.send(producerRecord)
-        return ResponseEntity.ok("message: '$message' sent to " + future.get().topic())
+        val result = producer.send(ProducerRecord(topic, message)).get()
+        return ResponseEntity.ok("message: '$message' sent to " + result.topic())
     }
 }
