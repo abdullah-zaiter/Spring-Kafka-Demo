@@ -13,11 +13,10 @@ import org.springframework.stereotype.Service
 class MessageConsumer (
         private val gson: Gson = GsonBuilder().setPrettyPrinting().create()
 ) {
-
     @KafkaListener(topics = ["test_topic"], groupId = "test_id")
     fun consume(message: String) {
-        println("${ANSI_BLUE}\n\nReceived:\n$message$ANSI_RESET")
+        println("\n${ANSI_BLUE}Received:\n$message${ANSI_RESET}")
         val consumedUser: ConsumedUser = gson.fromJson(message, ConsumedUser::class.java)
-        println("${ANSI_BLUE}$consumedUser$ANSI_RESET\n")
+        println("$ANSI_BLUE$consumedUser$ANSI_RESET\n")
     }
 }

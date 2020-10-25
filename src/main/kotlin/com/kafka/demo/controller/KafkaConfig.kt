@@ -11,7 +11,7 @@ import org.springframework.kafka.core.ProducerFactory
 import java.util.*
 
 @Configuration
-class KafkaProducerConfig {
+class KafkaConfig {
 
     @Bean
     fun kafkaTemplate() = KafkaTemplate(producerFactory())
