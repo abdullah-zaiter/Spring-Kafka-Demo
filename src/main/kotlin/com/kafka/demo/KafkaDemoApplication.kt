@@ -1,24 +1,37 @@
 package com.kafka.demo
 
-import com.kafka.demo.controller.ConsoleColors.ANSI_RESET
-import com.kafka.demo.controller.ConsoleColors.ANSI_YELLOW
-import com.kafka.demo.controller.MessageProducer
+import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import kotlin.random.Random
-
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
+import kotlin.system.exitProcess
+import com.kafka.demo.controller.ConsoleColors.ANSI_BOLD
+import com.kafka.demo.controller.ConsoleColors.ANSI_GREEN
+import com.kafka.demo.controller.ConsoleColors.ANSI_RESET
 
 @SpringBootApplication
 class KafkaDemoApplication
+private const val RUNNING_TIME_IN_SECONDS = 15L
+private const val ITERATION_INTERVAL = 2
 
 fun main(args: Array<String>) {
-	runApplication<KafkaDemoApplication>(*args)
-	val messageProducer = MessageProducer()
-	var count = 0
-	while (true){
-		val result = messageProducer.sendMessage("load {data= ${Random.nextInt()}, iteration= ${++count}}")
-		println(ANSI_YELLOW+result+ ANSI_RESET)
-		Thread.sleep(2000)
-	}
+	val application = runApplication<KafkaDemoApplication>(*args)
+	execute()
+	SpringApplication.exit(application)
+	exitProcess(0)
 }
 
+private fun execute() {
+	Executors.newSingleThreadExecutor().submit {
+		ProducerWrapper().setIterationInterval(ITERATION_INTERVAL).run()
+	}.let {
+		try {
+			it.get(RUNNING_TIME_IN_SECONDS, TimeUnit.SECONDS)
+		} catch (e: TimeoutException) {
+			println(ANSI_GREEN + ANSI_BOLD + "Done running for ${RUNNING_TIME_IN_SECONDS}s" + ANSI_RESET)
+			it.cancel(true)
+		}
+	}
+}
